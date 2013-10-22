@@ -1,0 +1,9 @@
+*.DS_Store
+.DS_Store
+DS_Store
+*.sublime-workspace
+*.sublime-project
+config/*
+session/*
+notes/*
+apex-scripts/*
