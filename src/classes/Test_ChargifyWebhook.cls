@@ -25,5 +25,4 @@ private class Test_ChargifyWebhook {
     @isTest static void testInnerClasses() {
         new ChargifyWebhook.Webhook();
     }
-	
 }
