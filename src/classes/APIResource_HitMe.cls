@@ -6,13 +6,11 @@
  *  - Site name: {SITE_NAME}
  *  - Relative endpoint: /services/apexrest/{URL_MAPPING}
  * 
- * 
  * @author  Luke
  * @date    Nov 2013
  */
 // @RestResource(urlMapping='{URL_MAPPING}') 
 global class APIResource_HitMe {
-
     global static void doGet() {
         RestRequest req = RestContext.request;
         RestResponse res = RestContext.response;
