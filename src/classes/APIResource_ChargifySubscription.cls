@@ -72,14 +72,17 @@ global class APIResource_ChargifySubscription {
     // ************* AUTHENTICATION SECTION BEGINS  ******************** //
     /*
     public class ChargifyWebhookException extends Exception {}
+
     private static final String site = 'vcg-demo';
-    private static final String shared_key = 'uuZcb3H1fpVz5OhRBv7H'; //Note: for prod, should be a Custom Setting
+    private static final String api_key = 'uuZcb3H1fpVz5OhRBv7H'; //Note: for prod, should be a Custom Setting
+    private static final String site_shared_key = 'x7x82snTo7lCgy7DhsI'; //Note: for prod, should be a Custom Setting
+
     
     private static List<ChargifyWebhook> getListFromChargify() {
         HttpRequest req = new HttpRequest();
         req.setEndpoint('https://' + site + '.chargify.com/webhooks.json');
         req.setMethod('GET');
-        String authString = shared_key + ':x';
+        String authString = api_key + ':x';
         String encodedAuth = EncodingUtil.base64encode(Blob.valueOf(authString));
         req.setHeader('Authorization', encodedAuth);
         HttpResponse res = (new Http()).send(req);
@@ -102,20 +105,19 @@ global class APIResource_ChargifySubscription {
         return hookMap;
     }
 
-    private static boolean verifyChargifyHook(RestRequest req) {
-        ChargifyWebhook hookFromServer = getMapFromChargify().get(req.params.get('id'));
+    private static boolean verifyChargifyHook(RestRequest req) {  
         String sigReceived = req.headers.get('X-Chargify-Webhook-Signature-Hmac-Sha-256');
 
-        if(hookFromServer == null) {
-            return false;
-        }
-        if(hookFromServer.webhook.signature_hmac_sha_256 != sigReceived) {
-            return false;
-        }
+        ChargifyBody bodyObj = new ChargifyBody(req.params);
+        String calcSignature = bodyObj.calculateSignature(site_shared_key);
 
+        if(calcSignature != sigReceived) {
+            System.debug('Invalid - signature mismatch: Calculated: \"' + calcSignature +'\" ; Received: \"' + sigReceived + '\"');
+            return false;
+        }
         return true;
     }
-    
     */
+    
 
 }
